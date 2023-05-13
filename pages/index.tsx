@@ -1,12 +1,37 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
+import { useState } from 'react';
+import Button from '../components/Button/Button';
+import BuildingList from '../components/BuildingList/BuildingList';
+
+
 
 export default function Home() {
+
+  type Building = {
+    buildingName: string;
+    rooms: {
+      room: string;
+      availableFor: number;
+    }[];
+  };
+
+  const [buildings, setBuildings] = useState<Building[]>([]);
+  const [showLoader, setShowLoader] = useState(false);
+
+  const handleClick = () => {
+    setShowLoader(true);  // Start the loading animation
+    fetchBuildings().then((data) => {
+      setBuildings(data as Building[]);
+      setShowLoader(false); // Stop the loading animation
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>OSU Classrooms</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -16,24 +41,24 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Find empty classrooms!
+          Term: Summer 2023
         </p>
 
-        <button className={styles.button}>
-          Search
-        </button>
+        <Button
+          text="Search"
+          onClick={handleClick}
+          loading={showLoader}
+          disabled={showLoader}
+        />
 
-
+        <div>
+          <BuildingList buildings={buildings} />
+        </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
+        <a>
+          Support us ❤️
         </a>
       </footer>
 
@@ -72,27 +97,6 @@ export default function Home() {
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
-        button {
-            display: block;
-            margin: 0 auto;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            display: block;
-            margin: 0 auto;
-            padding: 20px;
-            font-size: 1.2em;
-            background-color: white;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            cursor: pointer;
-          }
-          button:hover {
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-            transform: translateY(-3px);
-          }
-        }
       `}</style>
 
       <style jsx global>{`
@@ -111,3 +115,66 @@ export default function Home() {
     </div>
   )
 }
+
+
+const fetchBuildings = () => {
+  // Here we simulate an API call with a Promise that resolves after 2 seconds
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        {
+          buildingName: 'Dreese Labs',
+          rooms: [
+            {
+              room: 'DL0369',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0368',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0367',
+              availableFor: 100,
+            },
+          ],
+        },
+        // fill in random buildings Cladwell, etc. with random calssrooms 
+        {
+          buildingName: 'Caldwell Labs',
+          rooms: [
+            {
+              room: 'CL0369',
+              availableFor: 100,
+            },
+            {
+              room: 'CL0368',
+              availableFor: 100,
+            },
+            {
+              room: 'CL0367',
+              availableFor: 100,
+            },
+          ],
+        },
+        {
+          buildingName: 'Bolz Hall',
+          rooms: [
+            {
+              room: 'BH0369',
+              availableFor: 100,
+            },
+            {
+              room: 'BH0368',
+              availableFor: 100,
+            },
+            {
+              room: 'BH0367',
+              availableFor: 100,
+            },
+          ],
+        },
+      ]);
+    }, 2000);
+  });
+};
