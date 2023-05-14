@@ -1,0 +1,11 @@
+.classroom {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    border-radius: 8px;
+    /* Add border-radius for rounded edges */
+
+}

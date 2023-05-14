@@ -1,5 +1,6 @@
 // components/Building.js
 import { Card, Button } from 'react-bootstrap';
+import styles from './Building.module.css';
 import Classroom from '../Classroom/Classroom';
 import { useState } from 'react';
 
@@ -17,26 +18,25 @@ type BuildingProps = {
 function Building({ building }: BuildingProps) {
     const [showRooms, setShowRooms] = useState(false);
 
-    const handleButtonClick = () => {
+    const handleCardClick = () => {
         setShowRooms(!showRooms);
     };
 
     return (
-        <div>
-            <Button onClick={handleButtonClick}>
-                {building.buildingName}
-            </Button>
+        <Card className={styles.card} onClick={handleCardClick}>
+            <Card.Body>
+                <Card.Title className="text-center">{building.buildingName}</Card.Title>
 
-            {showRooms && (
-                <ul>
-                    { // Use the Classroom component to render each room
+                <div className={`${styles.rooms} ${showRooms ? styles.show : ''}`}>
+                    {showRooms && (
                         building.rooms.map((room, index) => (
-                            <Classroom key={index} classroom={room} />
+                            <Classroom classroom={room} />
                         ))
-                    }
-                </ul>
-            )}
-        </div>
+                    )}
+                </div>
+            </Card.Body>
+        </Card>
     );
+
 }
 export default Building;

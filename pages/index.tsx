@@ -51,9 +51,8 @@ export default function Home() {
           disabled={showLoader}
         />
 
-        <div>
-          <BuildingList buildings={buildings} />
-        </div>
+        <BuildingList buildings={buildings} />
+
       </main>
 
       <footer>
@@ -125,6 +124,30 @@ const fetchBuildings = () => {
         {
           buildingName: 'Dreese Labs',
           rooms: [
+            {
+              room: 'DL0369',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0368',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0367',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0369',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0368',
+              availableFor: 100,
+            },
+            {
+              room: 'DL0367',
+              availableFor: 100,
+            },
             {
               room: 'DL0369',
               availableFor: 100,
