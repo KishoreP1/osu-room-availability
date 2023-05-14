@@ -30,7 +30,7 @@ function Building({ building }: BuildingProps) {
                 <div className={`${styles.rooms} ${showRooms ? styles.show : ''}`}>
                     {showRooms && (
                         building.rooms.map((room, index) => (
-                            <Classroom classroom={room} />
+                            <Classroom key={`room-${room}`} classroom={room} />
                         ))
                     )}
                 </div>
