@@ -1,6 +1,5 @@
-/* Building.module.css */
-
 .card {
+    display: flex;
     cursor: pointer;
     margin: 1rem;
     flex-basis: 45%;
@@ -13,8 +12,16 @@
     transition: color 0.15s ease, border-color 0.15s ease;
     margin-bottom: 1rem;
     /* space between cards */
-    width: 50rem;
+    width: 100%;
     animation: slideInLeft 1s ease-in-out;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    .card {
+        width: 50rem;
+    }
 }
 
 .card:hover,
@@ -28,11 +35,11 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 20%));
     grid-gap: 1rem;
     margin-top: 1rem;
     align-items: center;
-    /* Center items vertically */
+    justify-content: center;
 }
 
 .rooms.show {
