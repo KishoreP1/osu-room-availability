@@ -1,11 +1,22 @@
+/* Common styling for all availability states */
 .classroom {
     display: inline-block;
     width: 100%;
     height: 100%;
     padding: 0.5rem;
     box-sizing: border-box;
-    border: 1px solid #333;
     border-radius: 8px;
-    /* Add border-radius for rounded edges */
+}
 
+/* Modifier classes for different availability states */
+.classroom-available {
+    border: 1px solid #4ad23b;
+}
+
+.classroom-unavailable {
+    border: 1px solid #c64444;
+}
+
+.classroom-soon-unavailable {
+    border: 1px solid #caae52;
 }

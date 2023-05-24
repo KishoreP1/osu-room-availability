@@ -28,15 +28,18 @@ function Building({ building }: BuildingProps) {
                 <Card.Title className="text-center">{building.building}</Card.Title>
 
                 <div className={`${styles.rooms} ${showRooms ? styles.show : ''}`}>
-                    {showRooms && (
-                        building.rooms.map((room, index) => (
-                            <Classroom key={`room-${room}`} classroom={room} />
-                        ))
-                    )}
+                    {showRooms ? (
+                        building.rooms.length === 0 ? (
+                            <p className="text-center">No rooms available</p>
+                        ) : (
+                            building.rooms.map((room, index) => (
+                                <Classroom key={`room-${room}`} classroom={room} />
+                            ))
+                        )
+                    ) : null}
                 </div>
             </Card.Body>
         </Card>
     );
-
 }
 export default Building;
