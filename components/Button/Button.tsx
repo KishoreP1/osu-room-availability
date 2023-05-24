@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Loader from '../../public/loader.svg';
 
 type ButtonProps = {
+    style: string;
     onClick: () => void;  // A function that takes no arguments and doesn't return anything
     text: string;
     loading: boolean;
@@ -10,9 +11,9 @@ type ButtonProps = {
 }
 
 
-export default function Button({ onClick, text, loading, disabled }: ButtonProps) {
+export default function Button({ style, onClick, text, loading, disabled }: ButtonProps) {
     return (
-        <button className={styles["search-btn"]} onClick={onClick} disabled={disabled}>
+        <button className={style} onClick={onClick} disabled={disabled}>
             {!loading ? text : <Image className={styles["spinner"]} src={Loader} alt="Loading" width={20} height={20} />}
         </button>
     )

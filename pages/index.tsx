@@ -67,6 +67,7 @@ export default function Home() {
         {location.loaded ? (
           <>
             <Button
+              style="btn btn-primary"
               text="Search"
               onClick={handleSearchClick}
               loading={showSearchBTNLoader}
@@ -81,6 +82,7 @@ export default function Home() {
 
         {showLoadMoreBTN && (
           <Button
+            style="btn btn-outline-secondary"
             text="Load More"
             onClick={handleLoadMoreClick}
             loading={showLoadMoreBTNLoader}
