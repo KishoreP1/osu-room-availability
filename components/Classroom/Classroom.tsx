@@ -3,7 +3,7 @@ import styles from './Classroom.module.css';
 type ClassroomProps = {
     classroom: {
         room: string;
-        availableFor: number;
+        availablefor: number;
     };
 };
 
@@ -11,7 +11,7 @@ function Classroom({ classroom }: ClassroomProps) {
     return (
         <div className={styles.classroom}>
             <p>{classroom.room}</p>
-            <p>free for {classroom.availableFor} mins</p>
+            <p>free for {classroom.availablefor} mins</p>
         </div>
     );
 }

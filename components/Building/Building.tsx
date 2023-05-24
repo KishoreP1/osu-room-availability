@@ -7,10 +7,10 @@ import { useState } from 'react';
 // Define the BuildingProps type
 type BuildingProps = {
     building: {
-        buildingName: string;
+        building: string;
         rooms: {
             room: string;
-            availableFor: number;
+            availablefor: number;
         }[];
     };
 };
@@ -25,7 +25,7 @@ function Building({ building }: BuildingProps) {
     return (
         <Card className={styles.card} onClick={handleCardClick}>
             <Card.Body>
-                <Card.Title className="text-center">{building.buildingName}</Card.Title>
+                <Card.Title className="text-center">{building.building}</Card.Title>
 
                 <div className={`${styles.rooms} ${showRooms ? styles.show : ''}`}>
                     {showRooms && (

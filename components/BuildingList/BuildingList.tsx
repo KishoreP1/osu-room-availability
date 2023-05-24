@@ -6,10 +6,10 @@ import styles from './BuildingList.module.css';
 
 type BuildingListProps = {
     buildings: {
-        buildingName: string;
+        building: string;
         rooms: {
             room: string;
-            availableFor: number;
+            availablefor: number;
         }[];
     }[];
 };

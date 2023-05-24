@@ -28,7 +28,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/index.tsx"
+    "pages/index.tsx",
+    "utils/fetchClosest.js",
+    "utils/useGeoLocation.js"
   ],
   "exclude": [
     "node_modules"

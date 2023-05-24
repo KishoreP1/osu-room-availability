@@ -4,29 +4,49 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Button from '../components/Button/Button';
 import BuildingList from '../components/BuildingList/BuildingList';
-
-
+import fetchClosest from '../utils/fetchClosest';
+import useGeoLocation from '../utils/useGeoLocation';
 
 export default function Home() {
 
   type Building = {
-    buildingName: string;
+    building: string;
     rooms: {
       room: string;
-      availableFor: number;
+      availablefor: number;
     }[];
   };
 
   const [buildings, setBuildings] = useState<Building[]>([]);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showSearchBTNLoader, setShowSearchBTNLoader] = useState(false);
+  const [page, setPage] = useState(0);
 
-  const handleClick = () => {
-    setShowLoader(true);  // Start the loading animation
-    fetchBuildings().then((data) => {
+  const [showLoadMoreBTN, setShowLoadMoreBTN] = useState(false);
+  const [showLoadMoreBTNLoader, setLoadMoreBTNLoader] = useState(false);
+
+  // call the useGeoLocation function and store the latitude and longitude in the variables
+  const location = useGeoLocation();
+
+  const handleSearchClick = () => {
+    setShowSearchBTNLoader(true);  // Start the loading animation
+    fetchClosest(location.coordinates.lat, location.coordinates.lng, 0).then((data) => {
       setBuildings(data as Building[]);
-      setShowLoader(false); // Stop the loading animation
+      setShowSearchBTNLoader(false); // Stop the loading animation
+      setPage(1); // set page to 1
+      setShowLoadMoreBTN((data as Building[]).length > 0);  // don't show the load more button if the data is 0 buildings
     });
   };
+
+  const handleLoadMoreClick = () => {
+    setLoadMoreBTNLoader(true);  // Start the loading animation
+    fetchClosest(location.coordinates.lat, location.coordinates.lng, page).then((data) => {
+      setBuildings([...buildings, ...(data as Building[])]);
+      setLoadMoreBTNLoader(false); // Stop the loading animation
+      setPage(page + 1); // increment the page
+      setShowLoadMoreBTN((data as Building[]).length > 0);  // don't show the load more button if the data is 0 buildings
+    });
+  };
+
 
   return (
     <div className={styles.container}>
@@ -44,14 +64,29 @@ export default function Home() {
           Term: Summer 2023
         </p>
 
-        <Button
-          text="Search"
-          onClick={handleClick}
-          loading={showLoader}
-          disabled={showLoader}
-        />
+        {location.loaded ? (
+          <>
+            <Button
+              text="Search"
+              onClick={handleSearchClick}
+              loading={showSearchBTNLoader}
+              disabled={showSearchBTNLoader}
+            />
+          </>
+        ) : (
+          <div>Location data not available yet. </div>
+        )}
 
         <BuildingList buildings={buildings} />
+
+        {showLoadMoreBTN && (
+          <Button
+            text="Load More"
+            onClick={handleLoadMoreClick}
+            loading={showLoadMoreBTNLoader}
+            disabled={showLoadMoreBTNLoader}
+          />
+        )}
 
       </main>
 
@@ -63,90 +98,3 @@ export default function Home() {
     </div>
   )
 }
-
-
-const fetchBuildings = () => {
-  // Here we simulate an API call with a Promise that resolves after 2 seconds
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve([
-        {
-          buildingName: 'Dreese Labs',
-          rooms: [
-            {
-              room: 'DL0369',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0368',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0367',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0369',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0368',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0367',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0369',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0368',
-              availableFor: 100,
-            },
-            {
-              room: 'DL0367',
-              availableFor: 100,
-            },
-          ],
-        },
-        // fill in random buildings Cladwell, etc. with random calssrooms 
-        {
-          buildingName: 'Caldwell Labs',
-          rooms: [
-            {
-              room: 'CL0369',
-              availableFor: 100,
-            },
-            {
-              room: 'CL0368',
-              availableFor: 100,
-            },
-            {
-              room: 'CL0367',
-              availableFor: 100,
-            },
-          ],
-        },
-        {
-          buildingName: 'Bolz Hall',
-          rooms: [
-            {
-              room: 'BH0369',
-              availableFor: 100,
-            },
-            {
-              room: 'BH0368',
-              availableFor: 100,
-            },
-            {
-              room: 'BH0367',
-              availableFor: 100,
-            },
-          ],
-        },
-      ]);
-    }, 2000);
-  });
-};
