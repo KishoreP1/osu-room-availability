@@ -35,7 +35,7 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 20%));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 20%));
     grid-gap: 1rem;
     margin-top: 1rem;
     align-items: center;
