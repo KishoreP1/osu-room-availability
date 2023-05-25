@@ -6,6 +6,9 @@ import Button from '../components/Button/Button';
 import BuildingList from '../components/BuildingList/BuildingList';
 import fetchClosest from '../utils/fetchClosest';
 import useGeoLocation from '../utils/useGeoLocation';
+import { MoonLoader } from 'react-spinners';
+import { MarkGithubIcon } from '@primer/octicons-react';
+
 
 export default function Home() {
 
@@ -75,7 +78,9 @@ export default function Home() {
             />
           </>
         ) : (
-          <div>Location data not available yet. </div>
+          <div>
+            <MoonLoader color={"#000000"} loading={true} size={15} />
+          </div>
         )}
 
         <BuildingList buildings={buildings} />
@@ -93,8 +98,8 @@ export default function Home() {
       </main>
 
       <footer>
-        <a>
-          Support us ❤️
+        <a href="https://github.com/KishoreP1/osu-room-availability" target="_blank" rel="noopener noreferrer">
+          Checkout The Repo <MarkGithubIcon size={24} className={styles["github-icon"]} />
         </a>
       </footer>
     </div>

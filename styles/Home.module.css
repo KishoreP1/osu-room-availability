@@ -83,6 +83,12 @@
   height: 1em;
 }
 
+.github-icon {
+  margin-left: 5px;
+  /* Adjust the spacing as needed */
+}
+
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
