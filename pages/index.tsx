@@ -60,7 +60,7 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          OSU Classroom Avaliability
+          OSU Classroom Availability
         </h1>
 
         <p className={styles.description}>
