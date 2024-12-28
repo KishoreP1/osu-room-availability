@@ -64,7 +64,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Term: Summer 2023
+          Term: Spring 2025
         </p>
 
         {location.loaded ? (
