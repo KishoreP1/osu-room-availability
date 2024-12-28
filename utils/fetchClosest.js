@@ -1,7 +1,7 @@
 // used to get the room matrix from the flask api
 
 const fetchClosest = async (latitude, longitude, pageNumber = 0) => {
-    const API_ENDPOINT = "https://kishorep1.pythonanywhere.com";
+    const API_ENDPOINT = "https://kishp1.pythonanywhere.com";
     // console log the request
     const response = await fetch(`${API_ENDPOINT}/closest?lat=${latitude}&long=${longitude}&page=${pageNumber}`);
 
